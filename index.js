@@ -13,9 +13,11 @@ module.exports = function parseElement (e) {
   if (e.id) {
     html += ` id="${e.id}"`
   }
+
   if (e.className) {
     html += ` class="${e.className}"`
   }
+
   if (attr) {
     for (let i = 0, len = attr.length; i < len; i++) {
       let val = attr[i].value
@@ -27,6 +29,7 @@ module.exports = function parseElement (e) {
       html += ' ' + attr[i].name + '="' + val + '"'
     }
   }
+
   for (let i in children) {
     let val
     if (typeof children[i] === 'string') {
@@ -50,6 +53,7 @@ module.exports = function parseElement (e) {
   } else {
     html += '/>'
   }
+
   return html
 }
 
