@@ -1,6 +1,6 @@
 {
   "name": "parse-element",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Fast html parser for dom-elements - works with html-element",
   "main": "index.js",
   "scripts": {
