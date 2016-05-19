@@ -36,7 +36,8 @@
     "tape": "^4.4.0",
     "vigour-doc": "^1.1.5",
     "watchify-server": "^1.0.2",
-    "budo": "^8.2.2"
+    "budo": "^8.2.2",
+    "vigour-performance": "^1.2.3"
   },
   "browser": {
     "html-element": false,

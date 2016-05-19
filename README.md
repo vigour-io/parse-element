@@ -8,3 +8,14 @@
 
 <!-- VDOC END -->
 Fast html parser for dom-elements - works with [html-element](https://www.npmjs.com/package/html-element)
+& in the browser (where it uses outerHTML)
+
+- Around [30x faster](https://github.com/vigour-io/parse-element/tree/master/test/perf.js) then element.outerHTML from html-element
+- Does not parse fields on elements set without setAttribute
+
+```javascript
+const parseElement = require('parse-element')
+const div = global.document.createElement('div')
+div.appendChild(global.document.createTextNode('text!'))
+console.log(parseElement(div)) //<div>text!</div>
+```
