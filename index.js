@@ -28,18 +28,18 @@ module.exports = function parseElement (e) {
     }
   }
   for (let i in children) {
+    let val
     if (typeof children[i] === 'string') {
-      if (!hasChildren && children[i] !== '') {
-        hasChildren = true
-        html += '>'
-      }
-      html += children[i]
+      val = children[i]
     } else {
+      val = parseElement(children[i])
+    }
+    if (val || (val === 0)) {
       if (!hasChildren) {
         hasChildren = true
         html += '>'
       }
-      html += parseElement(children[i])
+      html += val
     }
   }
 
