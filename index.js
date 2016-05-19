@@ -1,42 +1,54 @@
 'use strict'
-// also be able to parse document
-module.exports = function parseElement (element) {
-  const name = this.nodeName
-  const attr = this.attributes
-  const children = this.childNodes
+
+module.exports = function parseElement (e) {
+  const name = e.nodeName
+  if (name === '#text') {
+    return escapeAttribute(e.value) || ''
+  }
+  const attr = e.attributes
+  const children = e.childNodes
   var html = '<' + name
-  for (let i = 0, len = attr.length; i < len; i++) {
-    let val = attr[i].value
-    if (typeof val === 'string') {
-      val = escapeAttribute(attr[i].value)
+  if (e.id) {
+    html += ` id="${e.id}"`
+  }
+  if (e.className) {
+    html += ` class="${e.className}"`
+  }
+  if (attr) {
+    for (let i = 0, len = attr.length; i < len; i++) {
+      let val = attr[i].value
+      if (attr[i].name === 'value') {
+        val = escapeValue(attr[i].value)
+      } else {
+        val = escapeAttribute(attr[i].value)
+      }
+      html += ' ' + attr[i].name + '="' + val + '"'
     }
-    html += ' ' + attr[i].name + '="' + val + '"'
   }
-  if (this.id) {
-    html += ` id="${this.id}"`
+  if (children && children.length) {
+    html += '>'
+    for (let i in children) {
+      html += parseElement(children[i])
+    }
+    html += `</${name}>`
+  } else {
+    if (name === 'textarea') {
+      html += `></${name}>`
+    } else {
+      html += '/>'
+    }
   }
-  if (this.className) {
-    html += ` class="${this.className}"`
-  }
-  if (this.value) {
-    html += ` value="${escapeHTML(this.value)}"`
-  }
-  html += '>'
-  for (let i = 0, len = children.length; i < len; i++) {
-    html += children[i].html()
-  }
-  html += `</${name}>`
   return html
 }
 
-// this piece can be geatly optmized
-function escapeHTML (s) {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
+function escapeValue (s) {
+  return typeof s === 'string' ? s.replace(/&/g, '&amp;') : s
 }
 
 function escapeAttribute (s) {
-  return escapeHTML(s).replace(/"/g, '&quot;')
+  return typeof s === 'string'
+    ? s.replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+    : s
 }

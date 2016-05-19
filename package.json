@@ -4,7 +4,7 @@
   "description": "Fast html parser for dom-elements - works with html-element",
   "main": "index.js",
   "scripts": {
-    "start": "watchify-server test/index.js",
+    "start": "budo test/index.js --live -p 8080",
     "test": "node test | tap-difflet && standard",
     "watch": "nodemon test | tap-difflet",
     "cover": "istanbul cover --report none --print detail test/index.js",
@@ -36,7 +36,11 @@
     "tape": "^4.4.0",
     "vigour-doc": "^1.1.5",
     "watchify-server": "^1.0.2",
-    "vigour-util": "^2.0.10"
+    "budo": "^8.2.2"
+  },
+  "browser": {
+    "html-element": false,
+    "./index.js": "./browser.js"
   },
   "keywords": [
     "html-element",
