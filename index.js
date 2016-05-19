@@ -28,13 +28,17 @@ module.exports = function parseElement (e) {
     }
   }
   for (let i in children) {
-    if (!hasChildren) {
-      hasChildren = true
-      html += '>'
-    }
     if (typeof children[i] === 'string') {
+      if (!hasChildren && children[i] !== '') {
+        hasChildren = true
+        html += '>'
+      }
       html += children[i]
     } else {
+      if (!hasChildren) {
+        hasChildren = true
+        html += '>'
+      }
       html += parseElement(children[i])
     }
   }

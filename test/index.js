@@ -48,5 +48,13 @@ test('parse element', (t) => {
     'innerHTML'
   )
 
+  const emptyHtml = global.document.createElement('span')
+  emptyHtml.innerHTML = ''
+  t.equal(
+    parseElement(emptyHtml),
+    '<span/>',
+    'empty innerHTML'
+  )
+
   t.end()
 })
