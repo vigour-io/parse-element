@@ -3,7 +3,7 @@ require('html-element')
 const test = require('tape')
 const parseElement = require('../')
 
-test('parses single element correctly', (t) => {
+test('parse element', (t) => {
   const div = global.document.createElement('div')
   div.className = 'hello'
   const input = global.document.createElement('input')
@@ -38,6 +38,14 @@ test('parses single element correctly', (t) => {
     parseElement(span),
     '<span id="hello" special="100">&lt;ha &amp; ha&gt;</span>',
     'span'
+  )
+
+  const html = global.document.createElement('span')
+  html.innerHTML = '<p>hey</p>'
+  t.equal(
+    parseElement(html),
+    '<span><p>hey</p></span>',
+    'innerHTML'
   )
 
   t.end()

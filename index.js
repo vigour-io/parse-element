@@ -8,6 +8,8 @@ module.exports = function parseElement (e) {
   const attr = e.attributes
   const children = e.childNodes
   var html = '<' + name
+  var hasChildren
+
   if (e.id) {
     html += ` id="${e.id}"`
   }
@@ -25,18 +27,24 @@ module.exports = function parseElement (e) {
       html += ' ' + attr[i].name + '="' + val + '"'
     }
   }
-  if (children && children.length) {
-    html += '>'
-    for (let i in children) {
+  for (let i in children) {
+    if (!hasChildren) {
+      hasChildren = true
+      html += '>'
+    }
+    if (typeof children[i] === 'string') {
+      html += children[i]
+    } else {
       html += parseElement(children[i])
     }
+  }
+
+  if (hasChildren) {
     html += `</${name}>`
+  } else if (name === 'textarea') {
+    html += `></${name}>`
   } else {
-    if (name === 'textarea') {
-      html += `></${name}>`
-    } else {
-      html += '/>'
-    }
+    html += '/>'
   }
   return html
 }
