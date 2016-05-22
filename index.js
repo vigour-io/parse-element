@@ -7,7 +7,7 @@ module.exports = function parseElement (e) {
   }
   const attr = e.attributes
   const children = e.childNodes
-  var html = '<' + name
+  var html = `<${name}`
   var hasChildren
 
   if (e.id) {
@@ -29,6 +29,7 @@ module.exports = function parseElement (e) {
       html += ' ' + attr[i].name + '="' + val + '"'
     }
   }
+  html += '>'
 
   for (let i in children) {
     let val
@@ -40,20 +41,12 @@ module.exports = function parseElement (e) {
     if (val || (val === 0)) {
       if (!hasChildren) {
         hasChildren = true
-        html += '>'
       }
       html += val
     }
   }
 
-  if (hasChildren) {
-    html += `</${name}>`
-  } else if (name === 'textarea') {
-    html += `></${name}>`
-  } else {
-    html += '/>'
-  }
-
+  html += `</${name}>`
   return html
 }
 
