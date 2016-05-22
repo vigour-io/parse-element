@@ -10,10 +10,6 @@ module.exports = function parseElement (e) {
   var html = `<${name}`
   var hasChildren
 
-  if (e.id) {
-    html += ` id="${e.id}"`
-  }
-
   if (e.className) {
     html += ` class="${e.className}"`
   }
@@ -29,6 +25,11 @@ module.exports = function parseElement (e) {
       html += ' ' + attr[i].name + '="' + val + '"'
     }
   }
+
+  if (e.id) {
+    html += ` id="${e.id}"`
+  }
+
   html += '>'
 
   for (let i in children) {
@@ -46,7 +47,9 @@ module.exports = function parseElement (e) {
     }
   }
 
-  html += `</${name}>`
+  if (name !== 'input' || hasChildren) {
+    html += `</${name}>`
+  }
   return html
 }
 

@@ -11,7 +11,7 @@ test('parse element', (t) => {
   div.appendChild(input)
   t.equal(
     parseElement(div),
-    '<div class="hello"><input value="<hello &amp; goodbye>"></input></div>',
+    '<div class="hello"><input value="<hello &amp; goodbye>"></div>',
     'div + input'
   )
 
@@ -36,7 +36,7 @@ test('parse element', (t) => {
   span.id = 'hello'
   t.equal(
     parseElement(span),
-    '<span id="hello" special="100">&lt;ha &amp; ha&gt;</span>',
+    '<span special="100" id="hello">&lt;ha &amp; ha&gt;</span>',
     'span'
   )
 
