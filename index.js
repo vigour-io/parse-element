@@ -6,9 +6,10 @@ module.exports = function parseElement (e) {
     return escapeAttribute(e.value) || ''
   }
   const attr = e.attributes
+  const styles = e.style
   const children = e.childNodes
   var html = `<${name}`
-  var hasChildren
+  var haschildren
 
   if (e.className) {
     html += ` class="${e.className}"`
@@ -22,7 +23,19 @@ module.exports = function parseElement (e) {
       } else {
         val = escapeAttribute(attr[i].value)
       }
-      html += ' ' + attr[i].name + '="' + val + '"'
+      html += ` ${attr[i].name}="${val}"`
+    }
+  }
+
+  if (styles) {
+    let keys = Object.keys(styles)
+    if (keys.length > 2) {
+      html += ' style="'
+      for (let i = 2, len = keys.length; i < len; i++) {
+        let key = keys[i]
+        html += `${key}:${styles[key]};`
+      }
+      html += '"'
     }
   }
 
@@ -40,14 +53,14 @@ module.exports = function parseElement (e) {
       val = parseElement(children[i])
     }
     if (val || (val === 0)) {
-      if (!hasChildren) {
-        hasChildren = true
+      if (!haschildren) {
+        haschildren = true
       }
       html += val
     }
   }
 
-  if (name !== 'input' || hasChildren) {
+  if (name !== 'input' || haschildren) {
     html += `</${name}>`
   }
   return html

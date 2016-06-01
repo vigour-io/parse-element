@@ -56,5 +56,15 @@ test('parse element', (t) => {
     'empty innerHTML'
   )
 
+  const styles = global.document.createElement('span')
+  styles.innerHTML = ''
+  styles.style.fontSize = '30px'
+  styles.style.color = 'red'
+  t.equal(
+    parseElement(styles),
+    '<span style="fontSize:30px;color:red;"></span>',
+    'parses styles'
+  )
+
   t.end()
 })

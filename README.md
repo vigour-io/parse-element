@@ -16,6 +16,6 @@ Fast html parser for dom-elements - works with [html-element](https://www.npmjs.
 ```javascript
 const parseElement = require('parse-element')
 const div = global.document.createElement('div')
-div.appendChild(global.document.createTextNode('text!'))
+div.appendchild(global.document.createTextNode('text!'))
 console.log(parseElement(div)) //<div>text!</div>
 ```
