@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "budo test/index.js --live -p 8080",
-    "test": "node test | tap-difflet && standard",
+    "test": "(ducktape; node test) | tap-difflet && standard",
     "watch": "nodemon test | tap-difflet",
     "cover": "istanbul cover --report none --print detail test/index.js",
     "docs": "node_modules/vigour-doc/bin/vdoc",
@@ -26,6 +26,7 @@
     "babelify": "^7.3.0"
   },
   "devDependencies": {
+    "ducktape": "^1.0.0",
     "html-element": "^1.5.0",
     "coveralls": "^2.11.9",
     "istanbul": "^0.4.3",
