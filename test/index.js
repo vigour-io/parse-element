@@ -62,7 +62,7 @@ test('parse element', (t) => {
   styles.style.color = 'red'
   t.equal(
     parseElement(styles),
-    '<span style="fontSize: 30px;color: red;"></span>',
+    '<span style="fontSize: 30px; color: red;"></span>',
     'parses styles'
   )
 
