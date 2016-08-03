@@ -33,7 +33,7 @@ module.exports = function parseElement (e) {
       html += ' style="'
       for (let i = 2, len = keys.length; i < len; i++) {
         let key = keys[i]
-        html += `${key}:${styles[key]};`
+        html += `${key}: ${styles[key]};`
       }
       html += '"'
     }
