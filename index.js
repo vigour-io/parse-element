@@ -1,4 +1,5 @@
 'use strict'
+const toDash = str => str.replace(/([A-Z])/g, ($1) => '-' + $1.toLowerCase())
 
 module.exports = function parseElement (e) {
   const name = e.nodeName
@@ -33,7 +34,7 @@ module.exports = function parseElement (e) {
       html += ' style="'
       for (let i = 2, len = keys.length; i < len; i++) {
         let key = keys[i]
-        html += (i > 2 ? ' ' : '') + `${key}: ${styles[key]};`
+        html += (i > 2 ? ' ' : '') + `${toDash(key)}: ${styles[key]};`
       }
       html += '"'
     }

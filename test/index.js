@@ -62,7 +62,17 @@ test('parse element', (t) => {
   styles.style.color = 'red'
   t.equal(
     parseElement(styles),
-    '<span style="fontSize: 30px; color: red;"></span>',
+    '<span style="font-size: 30px; color: red;"></span>',
+    'parses styles'
+  )
+
+  const camelCase = global.document.createElement('span')
+  camelCase.innerHTML = ''
+  camelCase.style.fontSize = '30px'
+  camelCase.style.color = 'red'
+  t.equal(
+    parseElement(camelCase),
+    '<span style="font-size: 30px; color: red;"></span>',
     'parses styles'
   )
 
